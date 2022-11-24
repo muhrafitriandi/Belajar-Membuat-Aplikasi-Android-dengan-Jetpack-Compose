@@ -201,3 +201,42 @@ fun ColumnAlignment() {
 fun ColumnAlignmentPreview() {
     ColumnAlignment()
 }
+
+@Composable
+fun RowAlignment() {
+    Column(modifier = Modifier.padding(16.dp)) {
+        Row(
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Top                      ",
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            ButtonA()
+            ButtonB()
+            ButtonC()
+        }
+        Spacing()
+        Row(verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+            Text("CenterVertically")
+            ButtonA()
+            ButtonB()
+            ButtonC()
+        }
+        Spacing()
+        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+            Text("Bottom                ", modifier = Modifier.align(Alignment.CenterVertically))
+            ButtonA()
+            ButtonB()
+            ButtonC()
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RowAlignmentPreview() {
+    RowAlignment()
+}
