@@ -127,3 +127,14 @@ fun RowButton() {
 fun Spacing() {
     Spacer(modifier = Modifier.padding(8.dp))
 }
+
+@Composable
+fun ColumnButton() {
+    Column(modifier = Modifier.padding(16.dp)) {
+        ButtonC("")
+        Spacing()
+        ButtonC("")
+        Spacing()
+        ButtonC("")
+    }
+}
