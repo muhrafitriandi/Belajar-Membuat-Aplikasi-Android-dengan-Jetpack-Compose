@@ -19,6 +19,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yandey.mybasiccompose.ui.theme.MyBasicComposeTheme
 
+private val sampleName = listOf(
+    "Andre",
+    "Desta",
+    "Parto",
+    "Wendy",
+    "Komeng",
+    "Raffi Ahmad",
+    "Andhika Pratama",
+    "Vincent Ryan Rompies"
+)
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,5 +75,36 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     MyBasicComposeTheme {
         Greeting("Jetpack Compose")
+    }
+}
+
+@Composable
+fun MyBasicComposeApp() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
+        GreetingList(names = sampleName)
+    }
+}
+
+@Composable
+fun GreetingList(names: List<String>) {
+    if (names.isNotEmpty()) {
+        Column {
+            for (name in names) {
+                Greeting(name = name)
+            }
+        }
+    } else {
+        Text(text = "No people to great :(")
+    }
+}
+
+@Preview(showBackground = true, device = Devices.PIXEL_4)
+@Composable
+fun HelloJetpackComposeAppPreview() {
+    MyBasicComposeTheme {
+        MyBasicComposeApp()
     }
 }
