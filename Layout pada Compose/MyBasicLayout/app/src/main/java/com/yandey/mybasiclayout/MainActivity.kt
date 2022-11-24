@@ -301,3 +301,45 @@ fun Arrangement() {
 fun ArrangementPreview() {
     Arrangement()
 }
+
+@Composable
+fun Weight() {
+    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+        Row {
+            ButtonWithText("1", Modifier.weight(1f))
+            ButtonWithText("1", Modifier.weight(1f))
+            ButtonWithText("1", Modifier.weight(1f))
+        }
+        Row {
+            ButtonWithText("1", Modifier.weight(1f))
+            ButtonWithText("2", Modifier.weight(2f))
+            ButtonWithText("1", Modifier.weight(1f))
+        }
+        Row {
+            ButtonWithText("1", Modifier.weight(1f))
+            ButtonWithText("2", Modifier.weight(2f))
+            ButtonWithText("3", Modifier.weight(3f))
+        }
+        Row {
+            ButtonWithText("1", Modifier.weight(1f))
+            ButtonWithText("2", Modifier.weight(2f))
+            ButtonWithText("3 fill true", Modifier.weight(weight = 3f, fill = true))
+        }
+        Row {
+            ButtonWithText("1", Modifier.weight(1f, true))
+            ButtonWithText("2", Modifier.weight(2f, true))
+            ButtonWithText("3 fill false", Modifier.weight(weight = 3f, fill = false))
+        }
+        Row {
+            ButtonWithText("1", Modifier.weight(1f))
+            ButtonWithText("0")
+            ButtonWithText("0")
+        }
+    }
+}
+
+@Preview(showBackground = true, widthDp = 600)
+@Composable
+fun WeightPreview() {
+    Weight()
+}
