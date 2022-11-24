@@ -240,3 +240,35 @@ fun RowAlignment() {
 fun RowAlignmentPreview() {
     RowAlignment()
 }
+
+@Composable
+fun BoxAlignment() {
+    Box(modifier = Modifier.padding(16.dp).fillMaxSize()) {
+        ButtonWithText("TopStart", Modifier.align(Alignment.TopStart))
+        ButtonWithText("TopCenter", Modifier.align(Alignment.TopCenter))
+        ButtonWithText("TopEnd", Modifier.align(Alignment.TopEnd))
+        ButtonWithText("CenterStart", Modifier.align(Alignment.CenterStart))
+        ButtonWithText("Center", Modifier.align(Alignment.Center))
+        ButtonWithText("CenterEnd", Modifier.align(Alignment.CenterEnd))
+        ButtonWithText("BottomStart", Modifier.align(Alignment.BottomStart))
+        ButtonWithText("BottomCenter", Modifier.align(Alignment.BottomCenter))
+        ButtonWithText("BottomEnd", Modifier.align(Alignment.BottomEnd))
+    }
+}
+
+@Preview(showBackground = true, widthDp = 500, heightDp = 200)
+@Composable
+fun BoxAlignmentPreview() {
+    BoxAlignment()
+}
+
+@Composable
+fun ButtonWithText(text: String, modifier: Modifier = Modifier) {
+    Button(
+        onClick = {},
+        colors = ButtonDefaults.buttonColors(colorResource(R.color.purple_500)),
+        modifier = modifier.padding(4.dp)
+    ) {
+        Text(text, textAlign = TextAlign.Center)
+    }
+}
