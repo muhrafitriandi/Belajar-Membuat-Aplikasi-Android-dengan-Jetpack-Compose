@@ -138,3 +138,12 @@ fun ColumnButton() {
         ButtonC("")
     }
 }
+
+@Composable
+fun BoxButton() {
+    Box(contentAlignment = Alignment.Center, modifier = Modifier.padding(16.dp)) {
+        ButtonA()
+        ButtonB()
+        ButtonC("")
+    }
+}
