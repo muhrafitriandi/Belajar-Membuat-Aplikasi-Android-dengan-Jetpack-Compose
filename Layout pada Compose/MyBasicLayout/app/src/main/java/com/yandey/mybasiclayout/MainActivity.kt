@@ -272,3 +272,32 @@ fun ButtonWithText(text: String, modifier: Modifier = Modifier) {
         Text(text, textAlign = TextAlign.Center)
     }
 }
+
+@Composable
+fun RowButtonMaxWidth(arrangement: Arrangement.Horizontal = Arrangement.Start) {
+    Row(horizontalArrangement = arrangement, modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+        ButtonC("")
+        Spacing()
+        ButtonC("")
+        Spacing()
+        ButtonC("")
+    }
+}
+
+@Composable
+fun Arrangement() {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        RowButtonMaxWidth(Arrangement.Start)
+        RowButtonMaxWidth(Arrangement.End)
+        RowButtonMaxWidth(Arrangement.Center)
+        RowButtonMaxWidth(Arrangement.SpaceEvenly)
+        RowButtonMaxWidth(Arrangement.SpaceAround)
+        RowButtonMaxWidth(Arrangement.SpaceBetween)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ArrangementPreview() {
+    Arrangement()
+}
