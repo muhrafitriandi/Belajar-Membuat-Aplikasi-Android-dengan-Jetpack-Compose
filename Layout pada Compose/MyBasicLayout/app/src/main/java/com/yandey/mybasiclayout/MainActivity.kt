@@ -162,3 +162,42 @@ fun BasicLayout() {
 fun BoxButtonPreview() {
     BasicLayout()
 }
+
+@Composable
+fun ColumnAlignment() {
+    Row(modifier = Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
+        Column(horizontalAlignment = Alignment.Start) {
+            Text("Start")
+            Spacing()
+            ButtonA()
+            Spacing()
+            ButtonB()
+            Spacing()
+            ButtonC()
+        }
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text("CenterHorizontally")
+            Spacing()
+            ButtonA()
+            Spacing()
+            ButtonB()
+            Spacing()
+            ButtonC()
+        }
+        Column(horizontalAlignment = Alignment.End) {
+            Text("End")
+            Spacing()
+            ButtonA()
+            Spacing()
+            ButtonB()
+            Spacing()
+            ButtonC()
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ColumnAlignmentPreview() {
+    ColumnAlignment()
+}
