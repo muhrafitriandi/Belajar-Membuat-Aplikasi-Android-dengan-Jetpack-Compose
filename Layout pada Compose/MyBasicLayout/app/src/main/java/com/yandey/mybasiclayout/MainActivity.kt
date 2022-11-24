@@ -147,3 +147,18 @@ fun BoxButton() {
         ButtonC("")
     }
 }
+
+@Composable
+fun BasicLayout() {
+    Row(modifier = Modifier.padding(16.dp)) {
+        RowButton()
+        ColumnButton()
+        BoxButton()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun BoxButtonPreview() {
+    BasicLayout()
+}
