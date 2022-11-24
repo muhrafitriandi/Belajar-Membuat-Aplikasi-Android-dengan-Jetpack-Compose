@@ -78,3 +78,52 @@ fun DefaultPreview() {
         ContactCard()
     }
 }
+
+@Composable
+fun ButtonA() {
+    Button(
+        onClick = {},
+        colors = ButtonDefaults.buttonColors(colorResource(R.color.purple_200)),
+        modifier = Modifier.size(80.dp)
+    ) {
+        Text("A")
+    }
+}
+
+@Composable
+fun ButtonB() {
+    Button(
+        onClick = {},
+        colors = ButtonDefaults.buttonColors(colorResource(R.color.purple_500)),
+        modifier = Modifier.size(60.dp)
+    ) {
+        Text("B")
+    }
+}
+
+@Composable
+fun ButtonC(text: String = "C") {
+    Button(
+        onClick = {},
+        colors = ButtonDefaults.buttonColors(colorResource(R.color.purple_700)),
+        modifier = Modifier.size(40.dp)
+    ) {
+        Text(text)
+    }
+}
+
+@Composable
+fun RowButton() {
+    Row(modifier = Modifier.padding(16.dp)) {
+        ButtonC("")
+        Spacing()
+        ButtonC("")
+        Spacing()
+        ButtonC("")
+    }
+}
+
+@Composable
+fun Spacing() {
+    Spacer(modifier = Modifier.padding(8.dp))
+}
