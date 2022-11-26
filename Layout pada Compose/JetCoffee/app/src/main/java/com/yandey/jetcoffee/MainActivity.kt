@@ -9,6 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.yandey.jetcoffee.ui.theme.JetCoffeeTheme
 
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    JetCoffeeApp()
                 }
             }
         }
@@ -30,14 +31,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun JetCoffeeApp() {
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = Devices.PIXEL_4)
 @Composable
-fun DefaultPreview() {
+fun JetCoffeeAppPreview() {
     JetCoffeeTheme {
-        Greeting("Android")
+        JetCoffeeApp()
     }
 }
