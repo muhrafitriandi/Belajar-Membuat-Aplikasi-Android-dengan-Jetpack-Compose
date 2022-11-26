@@ -60,3 +60,39 @@ fun ScaffoldPreview() {
         }
     }
 }
+
+@Preview
+@Composable
+fun CustomTopBarPreview() {
+    MyScaffoldTheme {
+        Scaffold(
+            topBar = {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .height(80.dp)
+                        .fillMaxWidth()
+                        .background(color = MaterialTheme.colors.primary)
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.dicoding_logo),
+                        contentDescription = null,
+                        modifier = Modifier.height(40.dp)
+                    )
+                }
+            },
+            floatingActionButton = {
+                FloatingActionButton(onClick = {}) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = "Add")
+                }
+            },
+        ) { innerPadding ->
+            Box(
+                modifier = Modifier.padding(innerPadding).fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text("Hello World")
+            }
+        }
+    }
+}
