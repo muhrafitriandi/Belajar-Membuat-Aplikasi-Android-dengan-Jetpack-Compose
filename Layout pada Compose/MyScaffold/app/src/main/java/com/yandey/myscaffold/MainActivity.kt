@@ -9,7 +9,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -95,4 +98,36 @@ fun CustomTopBarPreview() {
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun SlotBasedLayoutPreview() {
+    var showMenu by remember { mutableStateOf(false) }
+    TopAppBar(
+        navigationIcon = {
+            IconButton(onClick = {}) {
+                Icon(imageVector = Icons.Default.Menu, contentDescription = "Menu")
+            }
+        },
+        title = {
+            Text(text = "My Scaffold")
+        },
+        actions = {
+            IconButton(onClick = {}) {
+                Icon(imageVector = Icons.Default.Favorite, contentDescription = "Favorite")
+            }
+            IconButton(onClick = { showMenu = !showMenu }) {
+                Icon(imageVector = Icons.Default.MoreVert, contentDescription = "More")
+            }
+            DropdownMenu(
+                expanded = showMenu,
+                onDismissRequest = { showMenu = false }
+            ) {
+                DropdownMenuItem(onClick = {}) {
+                    Text(text = "Call me")
+                }
+            }
+        }
+    )
 }
