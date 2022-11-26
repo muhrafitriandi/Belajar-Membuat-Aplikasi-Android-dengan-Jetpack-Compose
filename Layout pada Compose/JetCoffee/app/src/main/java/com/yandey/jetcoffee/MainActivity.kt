@@ -48,8 +48,10 @@ class MainActivity : ComponentActivity() {
 fun JetCoffeeApp() {
     Scaffold(bottomBar = {
         BottomBar()
-    }) {
-        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+    }) { innerPadding ->
+        Column(modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(innerPadding)) {
             Banner()
             HomeSection(
                 title = stringResource(R.string.section_category),
