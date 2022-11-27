@@ -3,23 +3,19 @@ package com.yandey.mystatehoisting
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yandey.mystatehoisting.ui.theme.MyStateHoistingTheme
-import androidx.compose.runtime.getValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +58,45 @@ fun StatelessCounter(
         Button(onClick = { onClick() }) {
             Text("Click me!")
         }
+    }
+}
+
+@Composable
+fun MyScreen(modifier: Modifier = Modifier) {
+    // State terletak di MyScreen dan MySwitch
+    var checked by remember { mutableStateOf(false) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.padding(16.dp)
+    ) {
+        MySwitch(checked = checked, onCheckChanged = { checked = it })
+        Text(
+            text = if (checked) "ON" else "OFF",
+            Modifier.clickable {
+                checked = !checked
+            }
+        )
+    }
+}
+
+@Composable
+fun MySwitch(
+    checked: Boolean,
+    onCheckChanged: (Boolean) -> Unit
+) {
+    Switch(
+        checked = checked,
+        onCheckedChange = {
+            onCheckChanged(it)
+        }
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun StatePreview() {
+    MyStateHoistingTheme {
+        MyScreen()
     }
 }
 
