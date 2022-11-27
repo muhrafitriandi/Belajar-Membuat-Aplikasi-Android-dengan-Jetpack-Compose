@@ -64,13 +64,13 @@ fun StatefulTemperatureInput(
 }
 
 private fun convertToFahrenheit(celsius: String) =
-    celsius.toDoubleOrNull()?.let {
-        (it * 9 / 5) + 32
+    celsius.toDoubleOrNull().let {
+        ((it?.times(9)?.div(5))?.plus(32)) ?: ""
     }.toString()
 
 private fun convertToCelsius(fahrenheit: String) =
-    fahrenheit.toDoubleOrNull()?.let {
-        (it - 32) * 5 / 9
+    fahrenheit.toDoubleOrNull().let {
+        ((it?.minus(32))?.times(5)?.div(9)) ?: ""
     }.toString()
 
 @Composable
