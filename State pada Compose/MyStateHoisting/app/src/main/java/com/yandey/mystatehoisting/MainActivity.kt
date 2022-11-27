@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    CounterPreview()
                 }
             }
         }
@@ -39,15 +40,26 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun StatefulCounter(modifier: Modifier = Modifier) {
+    var count by rememberSaveable { mutableStateOf(0) }
+    StatelessCounter(
+        count = count,
+        onClick = { count++ },
+        modifier = modifier,
+    )
+}
+
+@Composable
+fun StatelessCounter(
+    count: Int,           //state
+    onClick: () -> Unit,  //event
+    modifier: Modifier = Modifier
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.padding(16.dp)
     ) {
-        var count by rememberSaveable {
-            mutableStateOf(0)
-        }
         Text("Button clicked $count times:")
-        Button(onClick = { count++ }) {
+        Button(onClick = { onClick() }) {
             Text("Click me!")
         }
     }
