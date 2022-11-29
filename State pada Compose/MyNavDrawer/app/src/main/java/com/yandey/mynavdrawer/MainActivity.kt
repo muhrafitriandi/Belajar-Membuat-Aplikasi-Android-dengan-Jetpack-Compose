@@ -54,6 +54,7 @@ fun MyNavDrawerApp() {
         drawerContent = {
             Text(stringResource(R.string.hello_from_nav_drawer))
         },
+        drawerGesturesEnabled = scaffoldState.drawerState.isOpen
     ) { paddingValues ->
         Box(
             modifier = Modifier.fillMaxSize().padding(paddingValues),
