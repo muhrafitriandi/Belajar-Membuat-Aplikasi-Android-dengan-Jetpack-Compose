@@ -3,6 +3,8 @@ package com.yandey.mynavdrawer
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,13 +15,13 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -77,7 +79,14 @@ fun MyNavDrawerApp() {
                             ).show()
                         }
                     }
-                }
+                },
+                onBackPress = {
+                    if (scaffoldState.drawerState.isOpen) {
+                        scope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                    }
+                },
             )
         },
         drawerGesturesEnabled = scaffoldState.drawerState.isOpen
@@ -97,6 +106,7 @@ fun MyNavDrawerApp() {
 fun MyDrawerContent(
     modifier: Modifier = Modifier,
     onItemSelected: (title: String) -> Unit,
+    onBackPress: () -> Unit
 ) {
     val items = listOf(
         MenuItem(
@@ -137,6 +147,34 @@ fun MyDrawerContent(
             }
         }
         Divider()
+    }
+    BackPressHandler {
+        onBackPress()
+    }
+}
+
+@Composable
+fun BackPressHandler(enabled: Boolean = true, onBackPressed: () -> Unit) {
+    val currentOnBackPressed by rememberUpdatedState(onBackPressed)
+    val backCallback = remember {
+        object : OnBackPressedCallback(enabled) {
+            override fun handleOnBackPressed() {
+                currentOnBackPressed()
+            }
+        }
+    }
+    SideEffect {
+        backCallback.isEnabled = enabled
+    }
+    val backDispatcher = checkNotNull(LocalOnBackPressedDispatcherOwner.current) {
+        "No OnBackPressedDispatcherOwner was provided via LocalOnBackPressedDispatcherOwner"
+    }.onBackPressedDispatcher
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner, backDispatcher) {
+        backDispatcher.addCallback(lifecycleOwner, backCallback)
+        onDispose {
+            backCallback.remove()
+        }
     }
 }
 
