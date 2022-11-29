@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,6 +46,7 @@ class MainActivity : ComponentActivity() {
 fun MyNavDrawerApp() {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -59,7 +61,13 @@ fun MyNavDrawerApp() {
         },
         drawerContent = {
             MyDrawerContent(
-                onItemSelected = {
+                onItemSelected = { title ->
+                    scope.launch {
+                        scaffoldState.snackbarHostState.showSnackbar(
+                            message = context.resources.getString(R.string.coming_soon, title),
+                            actionLabel = context.resources.getString(R.string.subscribe_question)
+                        )
+                    }
 
                 }
             )
@@ -67,7 +75,9 @@ fun MyNavDrawerApp() {
         drawerGesturesEnabled = scaffoldState.drawerState.isOpen
     ) { paddingValues ->
         Box(
-            modifier = Modifier.fillMaxSize().padding(paddingValues),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
             contentAlignment = Alignment.Center
         ) {
             Text(stringResource(R.string.hello_world))
