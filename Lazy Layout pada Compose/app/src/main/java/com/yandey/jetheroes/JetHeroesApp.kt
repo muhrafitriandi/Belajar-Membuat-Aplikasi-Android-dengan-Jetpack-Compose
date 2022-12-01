@@ -74,3 +74,11 @@ fun JetHeroesApp(
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun JetHeroesAppPreview() {
+    JetHeroesTheme {
+        JetHeroesApp()
+    }
+}
