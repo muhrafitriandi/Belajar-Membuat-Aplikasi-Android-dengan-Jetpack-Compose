@@ -101,7 +101,10 @@ fun JetHeroesApp(
         val showButton: Boolean by remember {
             derivedStateOf { listState.firstVisibleItemIndex > 0 }
         }
-        LazyColumn(state = listState) {
+        LazyColumn(
+            state = listState,
+            contentPadding = PaddingValues(bottom = 80.dp)
+        ) {
             items(HeroesData.heroes, key = { it.id }) { hero ->
                 HeroListItem(
                     name = hero.name,
