@@ -1,6 +1,6 @@
 package com.yandey.jetheroes
 
-package com.yandey.jetheroes.model
+import com.yandey.jetheroes.model.Hero
 
 object HeroesData {
     val heroes = listOf(
