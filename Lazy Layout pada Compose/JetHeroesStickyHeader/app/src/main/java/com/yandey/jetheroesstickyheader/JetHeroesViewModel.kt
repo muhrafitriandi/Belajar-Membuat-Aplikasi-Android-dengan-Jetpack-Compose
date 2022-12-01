@@ -7,7 +7,7 @@ import com.yandey.jetheroesstickyheader.model.Hero
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class JetHeroesViewModel(private val repository: HeroRepository) : ViewModel() {
+class JetHeroesViewModel(repository: HeroRepository) : ViewModel() {
     private val _groupedHeroes = MutableStateFlow(
         repository.getHeroes()
             .sortedBy { it.name }
