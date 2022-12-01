@@ -1,10 +1,9 @@
 package com.yandey.jetheroes
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -56,5 +55,22 @@ fun HeroListItemPreview() {
             name = "H.O.S. Cokroaminoto",
             photoUrl = ""
         )
+    }
+}
+
+@Composable
+fun JetHeroesApp(
+    modifier: Modifier = Modifier,
+) {
+    Box(modifier = modifier) {
+        LazyColumn {
+            items(HeroesData.heroes, key = { it.id }) { hero ->
+                HeroListItem(
+                    name = hero.name,
+                    photoUrl = hero.photoUrl,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+        }
     }
 }
