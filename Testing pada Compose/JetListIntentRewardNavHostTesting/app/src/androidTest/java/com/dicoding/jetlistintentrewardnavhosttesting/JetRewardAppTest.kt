@@ -2,9 +2,11 @@ package com.dicoding.jetlistintentrewardnavhosttesting
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
+import com.dicoding.jetlistintentrewardnavhosttesting.model.FakeRewardDataSource
 import com.dicoding.jetlistintentrewardnavhosttesting.ui.navigation.Screen
 import com.dicoding.jetlistintentrewardnavhosttesting.ui.theme.JetRewardTheme
 import junit.framework.Assert.assertEquals
@@ -31,5 +33,13 @@ class JetRewardAppTest {
     @Test
     fun navHost_verifyStartDestination() {
         navController.assertCurrentRouteName(Screen.Home.route)
+    }
+
+    @Test
+    fun navHost_clickItem_navigatesToDetailWithData() {
+        composeTestRule.onNodeWithTag("RewardList").performScrollToIndex(10)
+        composeTestRule.onNodeWithText(FakeRewardDataSource.dummyRewards[10].title).performClick()
+        navController.assertCurrentRouteName(Screen.DetailReward.route)
+        composeTestRule.onNodeWithText(FakeRewardDataSource.dummyRewards[10].title).assertIsDisplayed()
     }
 }
