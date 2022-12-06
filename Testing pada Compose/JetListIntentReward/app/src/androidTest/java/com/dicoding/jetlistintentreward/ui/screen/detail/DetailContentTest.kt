@@ -61,4 +61,10 @@ class DetailContentTest {
         composeTestRule.onNodeWithStringId(R.string.plus_symbol).performClick().performClick()
         composeTestRule.onNodeWithTag("count").assert(hasText("2"))
     }
+
+    @Test
+    fun decreaseProduct_stillZero() {
+        composeTestRule.onNodeWithStringId(R.string.minus_symbol).performClick()
+        composeTestRule.onNodeWithTag("count").assert(hasText("0"))
+    }
 }
