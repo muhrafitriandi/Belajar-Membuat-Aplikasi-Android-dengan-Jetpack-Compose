@@ -5,9 +5,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
+import com.dicoding.jetlistintentrewardnavhosttesting.ui.navigation.Screen
 import com.dicoding.jetlistintentrewardnavhosttesting.ui.theme.JetRewardTheme
+import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 
 class JetRewardAppTest {
     @get:Rule
@@ -23,5 +26,11 @@ class JetRewardAppTest {
                 JetRewardApp(navController = navController)
             }
         }
+    }
+
+    @Test
+    fun navHost_verifyStartDestination() {
+        val currentRoute = navController.currentBackStackEntry?.destination?.route
+        assertEquals(Screen.Home.route, currentRoute)
     }
 }
