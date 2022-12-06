@@ -116,10 +116,11 @@ fun NewsDetailContent(
                             ViewGroup.LayoutParams.MATCH_PARENT
                         )
                         webViewClient = WebViewClient()
+                        loadUrl(url)
                     }
                 },
                 update = {
-
+                    it.loadUrl(url)
                 }
             )
         }
