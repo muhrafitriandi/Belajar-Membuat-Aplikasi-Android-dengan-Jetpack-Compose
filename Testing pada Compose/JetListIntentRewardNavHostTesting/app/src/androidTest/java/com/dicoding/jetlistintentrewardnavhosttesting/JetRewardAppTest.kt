@@ -30,7 +30,6 @@ class JetRewardAppTest {
 
     @Test
     fun navHost_verifyStartDestination() {
-        val currentRoute = navController.currentBackStackEntry?.destination?.route
-        assertEquals(Screen.Home.route, currentRoute)
+        navController.assertCurrentRouteName(Screen.Home.route)
     }
 }
