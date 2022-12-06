@@ -55,4 +55,10 @@ class DetailContentTest {
         composeTestRule.onNodeWithStringId(R.string.plus_symbol).performClick()
         composeTestRule.onNodeWithContentDescription("Order Button").assertIsEnabled()
     }
+
+    @Test
+    fun increaseProduct_correctCounter() {
+        composeTestRule.onNodeWithStringId(R.string.plus_symbol).performClick().performClick()
+        composeTestRule.onNodeWithTag("count").assert(hasText("2"))
+    }
 }
