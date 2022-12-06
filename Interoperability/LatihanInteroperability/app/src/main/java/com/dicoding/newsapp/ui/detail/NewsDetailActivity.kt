@@ -1,6 +1,7 @@
 package com.dicoding.newsapp.ui.detail
 
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
@@ -8,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,13 +32,41 @@ class NewsDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         newsDetail = intent.getParcelableExtra<NewsEntity>(NEWS_DATA) as NewsEntity
-
-
+        setContent {
+            MaterialTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    NewsDetailScreen(
+                        newsDetail,
+                        viewModel
+                    )
+                }
+            }
+        }
     }
 
     companion object {
         const val NEWS_DATA = "data"
     }
+}
+
+@Composable
+fun NewsDetailScreen(
+    newsDetail: NewsEntity,
+    viewModel: NewsDetailViewModel,
+) {
+    viewModel.setNewsData(newsDetail)
+    val bookmarkStatus by viewModel.bookmarkStatus.observeAsState(false)
+    NewsDetailContent(
+        newsDetail.title,
+        newsDetail.url.toString(),
+        bookmarkStatus,
+        updateBookmarkStatus = {
+            viewModel.changeBookmark(newsDetail)
+        }
+    )
 }
 
 @Composable
