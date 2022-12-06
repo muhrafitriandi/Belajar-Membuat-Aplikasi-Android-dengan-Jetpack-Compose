@@ -42,4 +42,14 @@ class JetRewardAppTest {
         navController.assertCurrentRouteName(Screen.DetailReward.route)
         composeTestRule.onNodeWithText(FakeRewardDataSource.dummyRewards[10].title).assertIsDisplayed()
     }
+
+    @Test
+    fun navHost_bottomNavigation_working() {
+        composeTestRule.onNodeWithStringId(R.string.menu_cart).performClick()
+        navController.assertCurrentRouteName(Screen.Cart.route)
+        composeTestRule.onNodeWithStringId(R.string.menu_profile).performClick()
+        navController.assertCurrentRouteName(Screen.Profile.route)
+        composeTestRule.onNodeWithStringId(R.string.menu_home).performClick()
+        navController.assertCurrentRouteName(Screen.Home.route)
+    }
 }
