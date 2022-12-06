@@ -52,4 +52,13 @@ class JetRewardAppTest {
         composeTestRule.onNodeWithStringId(R.string.menu_home).performClick()
         navController.assertCurrentRouteName(Screen.Home.route)
     }
+
+    @Test
+    fun navHost_clickItem_navigatesBack() {
+        composeTestRule.onNodeWithTag("RewardList").performScrollToIndex(10)
+        composeTestRule.onNodeWithText(FakeRewardDataSource.dummyRewards[10].title).performClick()
+        navController.assertCurrentRouteName(Screen.DetailReward.route)
+        composeTestRule.onNodeWithContentDescription(composeTestRule.activity.getString(R.string.back)).performClick()
+        navController.assertCurrentRouteName(Screen.Home.route)
+    }
 }
