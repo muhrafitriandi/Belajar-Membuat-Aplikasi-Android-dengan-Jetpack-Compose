@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.viewinterop.AndroidView
 import com.dicoding.newsapp.R
 import com.dicoding.newsapp.data.local.entity.NewsEntity
 import com.dicoding.newsapp.ui.ViewModelFactory
@@ -104,7 +105,14 @@ fun NewsDetailContent(
         modifier = modifier
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
+            AndroidView(
+                factory = {
 
+                },
+                update = {
+
+                }
+            )
         }
     }
 }
