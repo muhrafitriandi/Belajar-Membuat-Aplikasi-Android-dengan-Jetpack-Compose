@@ -1,11 +1,8 @@
 package com.dicoding.jetlistintentreward.ui.screen.detail
 
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.onRoot
-import androidx.compose.ui.test.printToLog
 import com.dicoding.jetlistintentreward.model.OrderReward
 import com.dicoding.jetlistintentreward.model.Reward
 import org.junit.Rule
@@ -39,7 +36,7 @@ class DetailContentTest {
         }
         composeTestRule.onRoot().printToLog("currentLabelExists")
     }
-    
+
     @Test
     fun detailContent_isDisplayed() {
         composeTestRule.onNodeWithText(fakeOrderReward.reward.title).assertIsDisplayed()
@@ -49,5 +46,13 @@ class DetailContentTest {
                 fakeOrderReward.reward.requiredPoint
             )
         ).assertIsDisplayed()
+    }
+
+    @Test
+    fun increaseProduct_buttonEnabled() {
+        composeTestRule.onNodeWithContentDescription("Order Button").assertIsNotEnabled()
+        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.plus_symbol))
+            .performClick()
+        composeTestRule.onNodeWithContentDescription("Order Button").assertIsEnabled()
     }
 }
