@@ -13,44 +13,26 @@ data class ListMonster(
 
 data class Owner(
 
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("name")
+	val name: String,
+
 	@field:SerializedName("trainer_class")
 	val trainerClass: String,
 
 	@field:SerializedName("image_url")
-	val imageUrl: String,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: Int
+	val imageUrl: String
 )
 
 data class Monster(
 
-	@field:SerializedName("owner")
-	val owner: Owner,
-
-	@field:SerializedName("weakness")
-	val weakness: String,
-
-	@field:SerializedName("biology")
-	val biology: String,
-
-	@field:SerializedName("gender")
-	val gender: String,
-
-	@field:SerializedName("image_url")
-	val imageUrl: String,
+	@field:SerializedName("id")
+	val id: Int,
 
 	@field:SerializedName("name")
 	val name: String,
-
-	@field:SerializedName("weight")
-	val weight: String,
-
-	@field:SerializedName("id")
-	val id: Int,
 
 	@field:SerializedName("category")
 	val category: String,
@@ -58,6 +40,24 @@ data class Monster(
 	@field:SerializedName("type")
 	val type: List<String>,
 
+	@field:SerializedName("gender")
+	val gender: String,
+
+	@field:SerializedName("biology")
+	val biology: String,
+
 	@field:SerializedName("height")
-	val height: String
+	val height: String,
+
+	@field:SerializedName("weakness")
+	val weakness: String,
+
+	@field:SerializedName("weight")
+	val weight: String,
+
+	@field:SerializedName("image_url")
+	val imageUrl: String,
+
+	@field:SerializedName("owner")
+	val owner: Owner
 )
