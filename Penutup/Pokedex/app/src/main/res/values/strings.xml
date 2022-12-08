@@ -3,4 +3,8 @@
 
     <string name="gender_male">Male</string>
     <string name="gender_female">Female</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="menu_profile">Profile</string>
 </resources>
