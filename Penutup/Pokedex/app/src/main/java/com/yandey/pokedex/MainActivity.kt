@@ -9,7 +9,9 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.yandey.pokedex.ui.theme.PokedexTheme
 import com.yandey.pokedex.ui.screen.MainScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

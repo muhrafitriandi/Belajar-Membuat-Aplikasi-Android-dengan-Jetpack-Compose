@@ -22,7 +22,9 @@ fun BottomNavGraph(
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(route = Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(navigateToDetail = { id ->
+                navHostController.navigate(Screen.DetailMonster.createRoute(id))
+            })
         }
         composable(route = Screen.Favorite.route) {
             FavoriteScreen()
