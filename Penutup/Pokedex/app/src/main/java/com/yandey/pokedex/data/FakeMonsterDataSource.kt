@@ -1,4 +1,7 @@
-package com.yandey.pokedex.model
+package com.yandey.pokedex.data
+
+import com.yandey.pokedex.data.models.Monster
+import com.yandey.pokedex.data.models.Owner
 
 object FakeMonsterDataSource {
 
