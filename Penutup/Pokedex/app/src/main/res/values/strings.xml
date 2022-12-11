@@ -11,4 +11,6 @@
     <string name="search_pokemon">Search pokemon…</string>
 
     <string name="text_back">Back</string>
+    <string name="text_biology">Biology</string>
+    <string name="text_details">Details</string>
 </resources>

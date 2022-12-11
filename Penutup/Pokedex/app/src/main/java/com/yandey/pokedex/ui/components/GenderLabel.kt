@@ -26,7 +26,6 @@ fun GenderLabel(
     val color = if (gender == stringResource(id = R.string.gender_male)) R.color.blue else R.color.red
     Box(modifier = modifier) {
         ChipView(
-            modifier = modifier,
             item = gender,
             colorResource = colorResource(id = color)
         )
