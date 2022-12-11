@@ -143,7 +143,7 @@ fun Subtitle(
         text = subtitle,
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp, 0.dp, 16.dp, 0.dp),
+            .padding(16.dp, 0.dp, 16.dp, 16.dp),
         style = MaterialTheme.typography.body2,
         textAlign = TextAlign.Justify
     )

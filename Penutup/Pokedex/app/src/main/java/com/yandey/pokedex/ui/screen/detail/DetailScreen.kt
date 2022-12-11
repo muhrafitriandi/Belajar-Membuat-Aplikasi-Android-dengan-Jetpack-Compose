@@ -51,7 +51,7 @@ fun DetailContent(
     monster: Monster
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(8.dp, 0.dp, 8.dp, 16.dp),
+        contentPadding = PaddingValues(8.dp, 0.dp, 8.dp, 0.dp),
         modifier = modifier
     ) {
         item {
