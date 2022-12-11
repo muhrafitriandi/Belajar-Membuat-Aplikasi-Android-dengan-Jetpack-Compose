@@ -27,9 +27,10 @@ fun HomeScreen(
                 viewModel.search(query)
             }
             is UiState.Success -> {
+                val data = uiState.data
                 HomeContent(
                     modifier = modifier,
-                    monsters = uiState.data,
+                    monsters = data,
                     onItemClick = navigateToDetail,
                     query = query,
                     onQueryChange = viewModel::search
