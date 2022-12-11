@@ -1,5 +1,6 @@
 package com.yandey.pokedex.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,9 +32,26 @@ fun SearchBar(
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
-                tint = MaterialTheme.colors.surface,
+                tint = Color.LightGray,
                 contentDescription = null
             )
+        },
+        trailingIcon = {
+            when {
+                query.isNotEmpty() -> IconButton(
+                    onClick = {}
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Clear,
+                        tint = Color.LightGray,
+                        contentDescription = null,
+                        modifier = modifier
+                            .clickable {
+                                onQueryChange("")
+                            }
+                    )
+                }
+            }
         },
         singleLine = true,
         shape = RoundedCornerShape(100),
@@ -43,7 +62,10 @@ fun SearchBar(
             unfocusedIndicatorColor = Color.Transparent,
         ),
         placeholder = {
-            Text(stringResource(R.string.search_pokemon), color = MaterialTheme.colors.surface)
+            Text(
+                stringResource(R.string.search_pokemon),
+                color = Color.LightGray
+            )
         },
         modifier = modifier
             .padding(8.dp)
