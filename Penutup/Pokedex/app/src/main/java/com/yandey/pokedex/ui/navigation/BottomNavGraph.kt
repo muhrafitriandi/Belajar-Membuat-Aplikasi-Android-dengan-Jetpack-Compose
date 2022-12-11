@@ -13,13 +13,14 @@ import com.yandey.pokedex.ui.screen.profile.ProfileScreen
 
 @Composable
 fun BottomNavGraph(
+    modifier: Modifier,
     navHostController: NavHostController,
     paddingValues: PaddingValues
 ) {
     NavHost(
         navController = navHostController,
         startDestination = Screen.Home.route,
-        modifier = Modifier.padding(paddingValues)
+        modifier = modifier.padding(paddingValues)
     ) {
         composable(route = Screen.Home.route) {
             HomeScreen(navigateToDetail = { id ->

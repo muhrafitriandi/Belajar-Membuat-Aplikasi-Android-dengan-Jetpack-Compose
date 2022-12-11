@@ -37,6 +37,7 @@ fun MainScreen(
         modifier = modifier
     ) { paddingValues ->
         BottomNavGraph(
+            modifier = modifier,
             navHostController = navHostController,
             paddingValues = paddingValues
         )
@@ -45,8 +46,8 @@ fun MainScreen(
 
 @Composable
 fun BottomBar(
-    navHostController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navHostController: NavHostController
 ) {
     BottomNavigation(
         modifier = modifier
@@ -85,11 +86,13 @@ fun BottomBar(
 
 @Composable
 private fun RowScope.AddItem(
+    modifier: Modifier = Modifier,
     navigationItem: NavigationItem,
     currentRoute: NavDestination?,
     navHostController: NavHostController
 ) {
     BottomNavigationItem(
+        modifier = modifier,
         icon = {
             Icon(
                 imageVector = navigationItem.icon,

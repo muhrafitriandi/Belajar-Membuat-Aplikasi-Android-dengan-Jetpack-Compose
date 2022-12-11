@@ -19,25 +19,35 @@ import com.yandey.pokedex.R
 import com.yandey.pokedex.ui.theme.PokedexTheme
 
 @Composable
-fun GenderLabel(gender: String) {
+fun GenderLabel(
+    modifier: Modifier = Modifier,
+    gender: String
+) {
     val color = if (gender == stringResource(id = R.string.gender_male)) R.color.blue else R.color.red
-    ChipView(
-        item = gender,
-        colorResource = colorResource(id = color)
-    )
+    Box(modifier = modifier) {
+        ChipView(
+            modifier = modifier,
+            item = gender,
+            colorResource = colorResource(id = color)
+        )
+    }
 }
 
 @Composable
-fun ChipView(item: Any, colorResource: Color) {
+fun ChipView(
+    modifier: Modifier = Modifier,
+    item: Any,
+    colorResource: Color
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .wrapContentWidth()
             .clip(RoundedCornerShape(12.dp))
             .background(colorResource.copy(.08f))
     ) {
         Text(
             text = item as String,
-            modifier = Modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
+            modifier = modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
             style = MaterialTheme.typography.caption,
             color = colorResource
         )
