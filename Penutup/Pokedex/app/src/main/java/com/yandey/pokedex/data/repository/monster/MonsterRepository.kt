@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MonsterRepository {
     fun searchMonsters(query: String): Flow<List<Monster>>
+    fun getMonsterById(id: Long): Flow<Monster>
 }

@@ -6,3 +6,7 @@ object Route {
     const val PROFILE_ROUTE = "profile"
     const val DETAIL_ROUTE = "home/{id}"
 }
+
+object Constant {
+    const val ID = "id"
+}

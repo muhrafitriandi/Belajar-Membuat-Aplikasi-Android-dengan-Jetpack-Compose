@@ -9,4 +9,6 @@
     <string name="menu_profile">Profile</string>
 
     <string name="search_pokemon">Search pokemon…</string>
+
+    <string name="text_back">Back</string>
 </resources>

@@ -15,6 +15,11 @@ class MonsterRepositoryImpl @Inject constructor(
         emit(data)
     }
 
+    override fun getMonsterById(id: Long): Flow<Monster> =
+        flowOf(monster.first {
+            it.id == id
+        })
+
     private val monster = mutableListOf<Monster>()
 
     init {
