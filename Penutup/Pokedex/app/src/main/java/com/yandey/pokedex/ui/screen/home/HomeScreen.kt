@@ -73,7 +73,7 @@ fun ShowMonsters(
     onItemClick: (id: Long) -> Unit
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(8.dp),
+        contentPadding = PaddingValues(8.dp, 0.dp, 8.dp, 8.dp),
         modifier = modifier
     ) {
         items(monsters) { monster ->

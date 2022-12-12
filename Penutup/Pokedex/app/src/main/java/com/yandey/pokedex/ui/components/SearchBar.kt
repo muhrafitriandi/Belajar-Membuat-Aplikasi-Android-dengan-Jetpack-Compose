@@ -68,7 +68,7 @@ fun SearchBar(
             )
         },
         modifier = modifier
-            .padding(8.dp)
+            .padding(16.dp, 8.dp, 16.dp, 8.dp)
             .fillMaxWidth()
             .heightIn(min = 48.dp)
             .clip(RoundedCornerShape(100.dp))
