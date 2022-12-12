@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -22,7 +23,7 @@ fun DetailScreen(
     modifier: Modifier = Modifier,
     id: Long,
     viewModel: DetailViewModel = hiltViewModel(),
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
@@ -45,7 +46,7 @@ fun DetailScreen(
 @Composable
 fun DetailContent(
     modifier: Modifier = Modifier,
-    monster: Monster
+    monster: Monster,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(8.dp, 0.dp, 8.dp, 0.dp),
@@ -81,19 +82,25 @@ fun DetailContent(
 fun Details(
     modifier: Modifier = Modifier,
     monster: Monster,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(id = R.string.text_details)) },
+                actions = {
+                    TopAppBarActionButton(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        description = stringResource(id = R.string.button_favorite)
+                    ) {}
+                },
                 elevation = 0.dp,
                 backgroundColor = MaterialTheme.colors.background,
                 modifier = modifier.padding(start = 16.dp),
                 navigationIcon = {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = null,
+                        contentDescription = stringResource(id = R.string.button_back),
                         modifier = Modifier
                             .size(24.dp, 24.dp)
                             .clickable {
