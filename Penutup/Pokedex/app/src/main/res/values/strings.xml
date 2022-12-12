@@ -19,4 +19,5 @@
     <string name="text_weakness">Weakness</string>
     <string name="text_owner">Owner</string>
     <string name="text_find_me">Find me</string>
+    <string name="pokemon_not_found">Pokemon not found</string>
 </resources>
