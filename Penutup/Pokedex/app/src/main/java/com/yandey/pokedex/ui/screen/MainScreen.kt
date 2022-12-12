@@ -28,11 +28,17 @@ fun MainScreen(
     modifier: Modifier = Modifier,
     navHostController: NavHostController = rememberNavController()
 ) {
+
+    val navBackStackEntry by navHostController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomBar(
-                navHostController = navHostController
-            )
+            if (currentRoute != Screen.DetailMonster.route) {
+                BottomBar(
+                    navHostController = navHostController
+                )
+            }
         },
         modifier = modifier
     ) { paddingValues ->
