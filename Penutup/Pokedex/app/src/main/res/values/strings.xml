@@ -13,4 +13,8 @@
     <string name="text_back">Back</string>
     <string name="text_biology">Biology</string>
     <string name="text_details">Details</string>
+    <string name="text_about">About</string>
+    <string name="text_height">Height</string>
+    <string name="text_weight">Weight</string>
+    <string name="text_weakness">Weakness</string>
 </resources>

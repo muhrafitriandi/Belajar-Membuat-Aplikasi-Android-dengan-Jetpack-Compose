@@ -1,9 +1,7 @@
 package com.yandey.pokedex.ui.screen.detail
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -17,8 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.yandey.pokedex.R
 import com.yandey.pokedex.data.models.Monster
 import com.yandey.pokedex.ui.common.UiState
-import com.yandey.pokedex.ui.components.MonsterBasicInfo
-import com.yandey.pokedex.ui.components.MonsterBiologyInfo
+import com.yandey.pokedex.ui.components.*
 
 @Composable
 fun DetailScreen(
@@ -61,6 +58,11 @@ fun DetailContent(
         }
         item {
             MonsterBiologyInfo(
+                monster = monster
+            )
+        }
+        item {
+            MonsterAbout(
                 monster = monster
             )
         }

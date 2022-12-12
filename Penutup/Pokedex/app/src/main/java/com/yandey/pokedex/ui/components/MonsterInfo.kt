@@ -121,31 +121,38 @@ fun MonsterCategory(
 @Composable
 fun Title(
     modifier: Modifier = Modifier,
-    title: String
+    color: Color = Color.Unspecified,
+    title: String,
+    style: TextStyle = LocalTextStyle.current,
+    fontWeight: FontWeight? = null,
+    textAlign: TextAlign? = null
 ) {
     Text(
         text = title,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp, 0.dp, 16.dp, 0.dp),
-        style = MaterialTheme.typography.subtitle1,
-        fontWeight = FontWeight.W600,
-        textAlign = TextAlign.Start
+        modifier = modifier,
+        color = color,
+        style = style,
+        fontWeight = fontWeight,
+        textAlign = textAlign
     )
 }
 
 @Composable
-fun Subtitle(
+fun Value(
     modifier: Modifier = Modifier,
-    subtitle: String
+    color: Color = Color.Unspecified,
+    fontWeight: FontWeight? = null,
+    value: String,
+    style: TextStyle = LocalTextStyle.current,
+    textAlign: TextAlign? = null
 ) {
     Text(
-        text = subtitle,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp, 0.dp, 16.dp, 16.dp),
-        style = MaterialTheme.typography.body2,
-        textAlign = TextAlign.Justify
+        text = value,
+        modifier = modifier,
+        color = color,
+        fontWeight = fontWeight,
+        style = style,
+        textAlign = textAlign
     )
 }
 
@@ -155,9 +162,73 @@ fun MonsterBiologyInfo(
     monster: Monster
 ) {
     Spacer(modifier = modifier.height(16.dp))
-    Title(title = stringResource(id = R.string.text_biology))
+    Title(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp, 0.dp, 16.dp, 0.dp),
+        title = stringResource(id = R.string.text_biology),
+        style = MaterialTheme.typography.subtitle1,
+        fontWeight = FontWeight.W600,
+        textAlign = TextAlign.Start
+    )
     Spacer(modifier = modifier.height(8.dp))
-    Subtitle(subtitle = monster.biology)
+    Value(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp, 0.dp, 16.dp, 16.dp),
+        value = monster.biology,
+        style = MaterialTheme.typography.body2,
+        textAlign = TextAlign.Justify
+    )
+}
+
+@Composable
+fun MonsterAbout(
+    modifier: Modifier = Modifier,
+    monster: Monster
+) {
+    Spacer(modifier = modifier.height(16.dp))
+    Title(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp, 0.dp, 16.dp, 0.dp),
+        title = stringResource(id = R.string.text_about),
+        style = MaterialTheme.typography.subtitle1,
+        fontWeight = FontWeight.W600,
+        textAlign = TextAlign.Start
+    )
+    Spacer(modifier = modifier.height(8.dp))
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp, 0.dp, 16.dp, 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        AboutCard(
+            title = stringResource(id = R.string.text_height),
+            value = monster.height
+        )
+        AboutCard(
+            title = stringResource(id = R.string.text_weakness),
+            value = monster.weakness
+        )
+        AboutCard(
+            title = stringResource(id = R.string.text_weight),
+            value = monster.weight
+        )
+    }
+}
+
+@Composable
+@Preview
+fun MonsterAboutPreview() {
+    PokedexTheme {
+        Column {
+            MonsterAbout(
+                monster = FakeMonsterDataSource.dummyMonster[2]
+            )
+        }
+    }
 }
 
 @Composable
