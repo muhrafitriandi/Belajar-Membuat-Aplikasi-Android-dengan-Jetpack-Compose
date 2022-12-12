@@ -220,6 +220,37 @@ fun MonsterAbout(
 }
 
 @Composable
+fun OwnerInfo(
+    modifier: Modifier = Modifier,
+    monster: Monster
+) {
+    Spacer(modifier = modifier.height(16.dp))
+    Title(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp, 0.dp, 16.dp, 0.dp),
+        title = stringResource(id = R.string.text_owner),
+        style = MaterialTheme.typography.subtitle1,
+        fontWeight = FontWeight.W600,
+        textAlign = TextAlign.Start
+    )
+    Spacer(modifier = modifier.height(8.dp))
+    OwnerCard(
+        monster = monster
+    )
+}
+
+@Composable
+@Preview
+fun OwnerInfoPreview() {
+    PokedexTheme {
+        Column {
+            OwnerInfo(monster = FakeMonsterDataSource.dummyMonster[2])
+        }
+    }
+}
+
+@Composable
 @Preview
 fun MonsterAboutPreview() {
     PokedexTheme {

@@ -66,6 +66,11 @@ fun DetailContent(
                 monster = monster
             )
         }
+        item {
+            OwnerInfo(
+                monster = monster
+            )
+        }
     }
 }
 

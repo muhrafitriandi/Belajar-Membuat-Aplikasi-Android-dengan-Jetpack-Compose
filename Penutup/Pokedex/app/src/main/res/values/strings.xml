@@ -17,4 +17,5 @@
     <string name="text_height">Height</string>
     <string name="text_weight">Weight</string>
     <string name="text_weakness">Weakness</string>
+    <string name="text_owner">Owner</string>
 </resources>
