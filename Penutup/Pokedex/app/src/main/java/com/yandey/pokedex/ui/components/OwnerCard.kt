@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,6 +18,7 @@ import coil.compose.AsyncImage
 import com.yandey.pokedex.data.FakeMonsterDataSource
 import com.yandey.pokedex.data.models.Monster
 import com.yandey.pokedex.ui.theme.PokedexTheme
+import com.yandey.pokedex.R
 
 @Composable
 fun OwnerCard(
@@ -32,7 +34,7 @@ fun OwnerCard(
             modifier = modifier
                 .size(70.dp, 70.dp)
                 .clip(RoundedCornerShape(70.dp))
-                .background(color = MaterialTheme.colors.onSurface)
+                .background(color = colorResource(id = R.color.teal_700))
                 .padding(8.dp, 8.dp, 8.dp, 0.dp),
             model = monster.owner.imageUrl,
             contentDescription = null,
