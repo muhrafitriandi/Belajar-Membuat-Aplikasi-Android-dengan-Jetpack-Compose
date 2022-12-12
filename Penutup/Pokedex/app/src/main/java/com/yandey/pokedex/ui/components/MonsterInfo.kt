@@ -1,6 +1,7 @@
 package com.yandey.pokedex.ui.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -238,6 +239,40 @@ fun OwnerInfo(
     OwnerCard(
         monster = monster
     )
+}
+
+@Composable
+fun FindMeButton(
+    modifier: Modifier = Modifier
+) {
+    Spacer(modifier = Modifier.height(16.dp))
+    Button(
+        onClick = {},
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .padding(16.dp, 0.dp, 16.dp, 0.dp),
+        colors = ButtonDefaults.textButtonColors(
+            backgroundColor = MaterialTheme.colors.surface
+        ),
+        shape = RoundedCornerShape(100.dp)
+    ) {
+        Text(
+            text = stringResource(id = R.string.text_find_me),
+            color = MaterialTheme.colors.onSurface
+        )
+    }
+    Spacer(modifier = Modifier.height(24.dp))
+}
+
+@Composable
+@Preview
+fun FindMeButtonPreview() {
+    PokedexTheme {
+        Column {
+            FindMeButton()
+        }
+    }
 }
 
 @Composable
