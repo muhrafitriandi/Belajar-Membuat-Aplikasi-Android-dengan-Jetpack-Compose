@@ -4,7 +4,7 @@
     <style name="Theme.Pokedex" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/light_background</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        <item name="android:navigationBarColor">@color/light_background</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@color/navy_500</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
 </resources>
