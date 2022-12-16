@@ -13,8 +13,8 @@ data class Monster(
     @field:SerializedName("category")
     val category: String,
 
-    @field:SerializedName("type")
-    val type: List<String>,
+    @field:SerializedName("types")
+    val types: List<String>,
 
     @field:SerializedName("gender")
     val gender: String,

@@ -17,7 +17,7 @@ object ConstDB {
     const val COL_ID = "id"
     const val COL_NAME = "name"
     const val COL_CATEGORY = "category"
-    const val COL_TYPE = "type"
+    const val COL_TYPES = "types"
     const val COL_GENDER = "gender"
     const val COL_BIOLOGY = "biology"
     const val COL_HEIGHT = "height"

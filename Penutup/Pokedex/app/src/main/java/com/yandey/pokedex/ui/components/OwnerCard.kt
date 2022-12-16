@@ -16,15 +16,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.yandey.pokedex.data.FakeMonsterDataSource
-import com.yandey.pokedex.data.models.Monster
 import com.yandey.pokedex.ui.theme.PokedexTheme
 import com.yandey.pokedex.R
+import com.yandey.pokedex.data.models.Owner
 
 @Composable
 fun OwnerCard(
     modifier: Modifier = Modifier,
-    monster: Monster,
+    owner: Owner,
 ) {
     Row(
         modifier = modifier
@@ -37,8 +36,8 @@ fun OwnerCard(
                 .clip(RoundedCornerShape(70.dp))
                 .background(color = colorResource(id = R.color.teal_700))
                 .padding(8.dp, 8.dp, 8.dp, 0.dp),
-            imageUrl = monster.owner.imageUrl,
-            contentDescription = stringResource(id = R.string.content_image, monster.owner.name),
+            imageUrl = owner.imageUrl,
+            contentDescription = stringResource(id = R.string.content_image, owner.name),
             contentScale = ContentScale.Crop,
             alignment = Alignment.TopCenter
         )
@@ -51,7 +50,7 @@ fun OwnerCard(
         ) {
 
             Text(
-                text = monster.owner.name,
+                text = owner.name,
                 color = MaterialTheme.colors.surface,
                 style = MaterialTheme.typography.subtitle1,
                 fontWeight = FontWeight.W600,
@@ -61,7 +60,7 @@ fun OwnerCard(
             Spacer(modifier = modifier.height(8.dp))
 
             Text(
-                text = monster.owner.trainerClass,
+                text = owner.trainerClass,
                 color = MaterialTheme.colors.surface,
                 style = MaterialTheme.typography.caption
             )
@@ -74,7 +73,12 @@ fun OwnerCard(
 fun OwnerCardPreview() {
     PokedexTheme {
         OwnerCard(
-            monster = FakeMonsterDataSource.dummyMonster[2]
+            owner = Owner(
+                3,
+                "May",
+                "Pokemon Coordinator",
+                "https://archives.bulbagarden.net/media/upload/a/a0/Omega_Ruby_Alpha_Sapphire_May.png"
+            )
         )
     }
 }

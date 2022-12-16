@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.yandey.pokedex.R
@@ -26,11 +27,14 @@ fun EmptyData(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = text
+            text = text,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -39,14 +43,21 @@ fun EmptyData(
 fun ShowMonsters(
     modifier: Modifier = Modifier,
     monsters: List<Monster>,
-    onItemClick: (id: Long) -> Unit
+    onItemClick: (id: Long) -> Unit,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(8.dp, 0.dp, 8.dp, 8.dp),
         modifier = modifier
     ) {
-        items(monsters) { monster ->
-            MonsterItem(monster = monster) { id ->
+        items(monsters) { item ->
+            MonsterItem(
+                id = item.id,
+                imageUrl = item.imageUrl,
+                name = item.name,
+                category = item.category,
+                types = item.types,
+                gender = item.gender
+            ) { id ->
                 onItemClick(id)
             }
         }
@@ -55,7 +66,7 @@ fun ShowMonsters(
 
 @Composable
 fun LoadingState(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
@@ -68,14 +79,17 @@ fun LoadingState(
 @Composable
 fun ErrorState(
     error: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = error
+            text = error,
+            textAlign = TextAlign.Center
         )
     }
 }
@@ -86,7 +100,7 @@ fun LoadImage(
     imageUrl: String,
     contentDescription: String,
     contentScale: ContentScale = ContentScale.Fit,
-    alignment: Alignment = Alignment.Center
+    alignment: Alignment = Alignment.Center,
 ) {
     AsyncImage(
         modifier = modifier,
@@ -103,7 +117,7 @@ fun LoadImage(
 fun ChipView(
     modifier: Modifier = Modifier,
     item: Any,
-    colorResource: Color
+    colorResource: Color,
 ) {
     Box(
         modifier = modifier

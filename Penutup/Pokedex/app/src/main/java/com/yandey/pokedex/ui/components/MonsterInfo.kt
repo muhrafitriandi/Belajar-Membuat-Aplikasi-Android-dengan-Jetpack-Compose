@@ -12,14 +12,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yandey.pokedex.R
-import com.yandey.pokedex.data.FakeMonsterDataSource
-import com.yandey.pokedex.data.models.Monster
+import com.yandey.pokedex.data.models.Owner
 import com.yandey.pokedex.ui.theme.PokedexTheme
 
 @Composable
 fun MonsterBasicInfo(
     modifier: Modifier = Modifier,
-    monster: Monster,
+    imageUrl: String,
+    name: String,
+    gender: String,
+    category: String,
+    types: List<String>,
 ) {
     Row(
         modifier = modifier
@@ -34,15 +37,15 @@ fun MonsterBasicInfo(
                     modifier = modifier
                         .fillMaxWidth()
                         .size(250.dp),
-                    imageUrl = monster.imageUrl,
-                    contentDescription = stringResource(id = R.string.content_image, monster.name)
+                    imageUrl = imageUrl,
+                    contentDescription = stringResource(id = R.string.content_image, name)
                 )
             }
 
             Row {
                 Text(
                     modifier = modifier.padding(0.dp, 0.dp, 0.dp, 8.dp),
-                    text = monster.name,
+                    text = name,
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.surface
@@ -50,19 +53,19 @@ fun MonsterBasicInfo(
 
                 Spacer(modifier.weight(1f))
 
-                GenderLabel(gender = monster.gender)
+                GenderLabel(gender = gender)
             }
 
             Text(
                 modifier = modifier.padding(0.dp, 0.dp, 0.dp, 8.dp),
-                text = monster.category,
+                text = category,
                 color = MaterialTheme.colors.surface,
                 style = MaterialTheme.typography.caption
             )
 
             Row(verticalAlignment = Alignment.Bottom) {
                 TypeLabel(
-                    types = monster.type,
+                    types = types,
                     modifier = modifier.padding(0.dp, 18.dp, 0.dp, 18.dp)
                 )
             }
@@ -73,7 +76,7 @@ fun MonsterBasicInfo(
 @Composable
 fun MonsterBiologyInfo(
     modifier: Modifier = Modifier,
-    monster: Monster,
+    biology: String,
 ) {
     Spacer(modifier = modifier.height(16.dp))
     Text(
@@ -92,7 +95,7 @@ fun MonsterBiologyInfo(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp, 0.dp, 16.dp, 16.dp),
-        text = monster.biology,
+        text = biology,
         style = MaterialTheme.typography.body2,
         textAlign = TextAlign.Justify
     )
@@ -101,7 +104,9 @@ fun MonsterBiologyInfo(
 @Composable
 fun MonsterAbout(
     modifier: Modifier = Modifier,
-    monster: Monster,
+    height: String,
+    weakness: String,
+    weight: String,
 ) {
     Spacer(modifier = modifier.height(16.dp))
     Text(
@@ -124,15 +129,15 @@ fun MonsterAbout(
     ) {
         AboutCard(
             title = stringResource(id = R.string.text_height),
-            value = monster.height
+            value = height
         )
         AboutCard(
             title = stringResource(id = R.string.text_weakness),
-            value = monster.weakness
+            value = weakness
         )
         AboutCard(
             title = stringResource(id = R.string.text_weight),
-            value = monster.weight
+            value = weight
         )
     }
 }
@@ -140,7 +145,7 @@ fun MonsterAbout(
 @Composable
 fun OwnerInfo(
     modifier: Modifier = Modifier,
-    monster: Monster,
+    owner: Owner,
 ) {
     Spacer(modifier = modifier.height(16.dp))
     Text(
@@ -153,7 +158,7 @@ fun OwnerInfo(
         textAlign = TextAlign.Start
     )
     Spacer(modifier = modifier.height(8.dp))
-    OwnerCard(monster = monster)
+    OwnerCard(owner = owner)
 }
 
 @Composable
@@ -195,7 +200,14 @@ fun FindMeButtonPreview() {
 fun OwnerInfoPreview() {
     PokedexTheme {
         Column {
-            OwnerInfo(monster = FakeMonsterDataSource.dummyMonster[2])
+            OwnerInfo(
+                owner = Owner(
+                    3,
+                    "May",
+                    "Pokemon Coordinator",
+                    "https://archives.bulbagarden.net/media/upload/a/a0/Omega_Ruby_Alpha_Sapphire_May.png"
+                )
+            )
         }
     }
 }
@@ -206,7 +218,9 @@ fun MonsterAboutPreview() {
     PokedexTheme {
         Column {
             MonsterAbout(
-                monster = FakeMonsterDataSource.dummyMonster[2]
+                height = "3' 07\"",
+                weakness = "Fire",
+                weight = "70.5 lbs"
             )
         }
     }
@@ -218,7 +232,7 @@ fun MonsterBiologyInfoPreview() {
     PokedexTheme {
         Column {
             MonsterBiologyInfo(
-                monster = FakeMonsterDataSource.dummyMonster[2]
+                biology = "Butterfree is a lepidopteran insect Pokémon which resembles a vaguely anthropomorphic butterfly with a purple body. Unlike true insects, it only has two body segments and four light blue legs. The upper pair of its legs resemble small, three-fingered hands, while the lower pair resembles long, digit-less feet. Butterfree has two black antennae, a light blue snout with two fangs underneath, and large, red compound eyes. Its two pairs of wings are white with black venation. Two oval scales on a female Butterfree's lower wings are black, but they are white on a male."
             )
         }
     }
@@ -230,7 +244,11 @@ fun MonsterBasicInfoPreview() {
     PokedexTheme {
         Column {
             MonsterBasicInfo(
-                monster = FakeMonsterDataSource.dummyMonster[2]
+                imageUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/012.png",
+                name = "Butterfree",
+                gender = "Female",
+                category = "Butterfly",
+                types = listOf("Bug", "Flying")
             )
         }
     }

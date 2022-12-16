@@ -17,14 +17,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.yandey.pokedex.R
-import com.yandey.pokedex.data.FakeMonsterDataSource
-import com.yandey.pokedex.data.models.Monster
 import com.yandey.pokedex.ui.theme.PokedexTheme
 
 @Composable
 fun MonsterItem(
     modifier: Modifier = Modifier,
-    monster: Monster,
+    id: Long,
+    imageUrl: String,
+    name: String,
+    category: String,
+    types: List<String>,
+    gender: String,
     onItemClick: (id: Long) -> Unit,
 ) {
     Card(
@@ -33,7 +36,7 @@ fun MonsterItem(
             .padding(8.dp)
             .clip(RoundedCornerShape(16.dp))
             .clickable(onClick = {
-                onItemClick(monster.id)
+                onItemClick(id)
             }),
         elevation = 0.dp,
         backgroundColor = MaterialTheme.colors.onSurface
@@ -49,8 +52,8 @@ fun MonsterItem(
                     .align(Alignment.CenterVertically)
                     .size(80.dp, 80.dp)
                     .clip(RoundedCornerShape(16.dp)),
-                imageUrl = monster.imageUrl,
-                contentDescription = stringResource(id = R.string.content_image, monster.name),
+                imageUrl = imageUrl,
+                contentDescription = stringResource(id = R.string.content_image, name),
                 contentScale = ContentScale.Crop
             )
 
@@ -59,7 +62,7 @@ fun MonsterItem(
             Column {
 
                 Text(
-                    text = monster.name,
+                    text = name,
                     style = typography.subtitle1,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.surface
@@ -68,14 +71,14 @@ fun MonsterItem(
                 Spacer(modifier = modifier.height(8.dp))
 
                 Text(
-                    text = monster.category,
+                    text = category,
                     color = MaterialTheme.colors.surface,
                     style = typography.caption
                 )
 
                 Row(verticalAlignment = Alignment.Bottom) {
                     TypeLabel(
-                        types = monster.type,
+                        types = types,
                         modifier = modifier.padding(0.dp, 19.dp, 0.dp, 18.dp)
                     )
                 }
@@ -84,7 +87,7 @@ fun MonsterItem(
                 modifier = modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                GenderLabel(gender = monster.gender)
+                GenderLabel(gender = gender)
             }
         }
     }
@@ -96,7 +99,12 @@ fun MonsterItemPreview() {
     PokedexTheme {
         Row {
             MonsterItem(
-                monster = FakeMonsterDataSource.dummyMonster[2],
+                id = 3,
+                imageUrl = "https://assets.pokemon.com/assets/cms2/img/pokedex/full/012.png",
+                name = "Butterfree",
+                category = "Butterfly",
+                types = listOf("Bug", "Flying"),
+                gender = "Female",
                 onItemClick = {}
             )
         }

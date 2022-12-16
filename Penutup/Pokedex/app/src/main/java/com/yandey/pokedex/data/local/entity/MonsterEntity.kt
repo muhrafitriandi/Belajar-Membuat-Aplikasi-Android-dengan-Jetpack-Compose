@@ -13,7 +13,7 @@ import com.yandey.pokedex.utils.ConstDB.COL_IMAGE_URL
 import com.yandey.pokedex.utils.ConstDB.COL_IS_FAVORITE
 import com.yandey.pokedex.utils.ConstDB.COL_NAME
 import com.yandey.pokedex.utils.ConstDB.COL_OWNER
-import com.yandey.pokedex.utils.ConstDB.COL_TYPE
+import com.yandey.pokedex.utils.ConstDB.COL_TYPES
 import com.yandey.pokedex.utils.ConstDB.COL_WEAKNESS
 import com.yandey.pokedex.utils.ConstDB.COL_WEIGHT
 import com.yandey.pokedex.utils.ConstDB.MONSTER_TABLE
@@ -31,8 +31,8 @@ data class MonsterEntity(
     @field:ColumnInfo(name = COL_CATEGORY)
     val category: String,
 
-    @field:ColumnInfo(name = COL_TYPE)
-    val type: List<String>,
+    @field:ColumnInfo(name = COL_TYPES)
+    val types: List<String>,
 
     @field:ColumnInfo(name = COL_GENDER)
     val gender: String,

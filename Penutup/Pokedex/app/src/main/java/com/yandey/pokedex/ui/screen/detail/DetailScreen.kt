@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.yandey.pokedex.R
 import com.yandey.pokedex.data.models.Monster
+import com.yandey.pokedex.data.models.Owner
 import com.yandey.pokedex.ui.common.UiState
 import com.yandey.pokedex.ui.components.*
 
@@ -52,7 +53,16 @@ fun DetailScreen(
 @Composable
 fun DetailContent(
     modifier: Modifier = Modifier,
-    monster: Monster,
+    imageUrl: String,
+    name: String,
+    gender: String,
+    category: String,
+    types: List<String>,
+    biology: String,
+    height: String,
+    weakness: String,
+    weight: String,
+    owner: Owner,
 ) {
     LazyColumn(
         contentPadding = PaddingValues(8.dp, 0.dp, 8.dp, 0.dp),
@@ -60,23 +70,27 @@ fun DetailContent(
     ) {
         item {
             MonsterBasicInfo(
-                monster = monster
+                imageUrl = imageUrl,
+                name = name,
+                gender = gender,
+                category = category,
+                types = types
             )
         }
         item {
             MonsterBiologyInfo(
-                monster = monster
+                biology = biology
             )
         }
         item {
             MonsterAbout(
-                monster = monster
+                height = height,
+                weakness = weakness,
+                weight = weight
             )
         }
         item {
-            OwnerInfo(
-                monster = monster
-            )
+            OwnerInfo(owner = owner)
         }
         item {
             FindMeButton()
@@ -92,12 +106,14 @@ fun Details(
     onUpdateFavoriteMonster: (id: Long, isFavorite: Boolean) -> Unit,
 ) {
 
+    val (id, name, category, types, gender, biology, height, weakness, weight, imageUrl, owner, isFavorite) = monster
+
     var enabled by remember {
-        mutableStateOf(monster.isFavorite)
+        mutableStateOf(isFavorite)
     }
 
     val context = LocalContext.current.applicationContext
-    val message = "${monster.name} ${
+    val message = "$name ${
         if (!enabled) stringResource(id = R.string.toast_item_added_to_favorite)
         else stringResource(id = R.string.toast_item_removed_from_favorite)
     }"
@@ -108,8 +124,8 @@ fun Details(
                 title = { Text(stringResource(id = R.string.text_details)) },
                 actions = {
                     IconButton(onClick = {
-                        onUpdateFavoriteMonster(monster.id, !monster.isFavorite)
-                        enabled = !monster.isFavorite
+                        onUpdateFavoriteMonster(id, !isFavorite)
+                        enabled = !isFavorite
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                     }) {
                         Icon(
@@ -137,7 +153,19 @@ fun Details(
         },
 
         content = {
-            DetailContent(monster = monster, modifier = modifier.padding(it))
+            DetailContent(
+                imageUrl = imageUrl,
+                name = name,
+                gender = gender,
+                category = category,
+                types = types,
+                biology = biology,
+                height = height,
+                weakness = weakness,
+                weight = weight,
+                modifier = modifier.padding(it),
+                owner = owner
+            )
         }
     )
 }
