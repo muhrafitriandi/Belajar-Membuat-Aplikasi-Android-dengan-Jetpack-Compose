@@ -19,7 +19,16 @@
     <string name="text_weakness">Weakness</string>
     <string name="text_owner">Owner</string>
     <string name="text_find_me">Find me</string>
-    <string name="pokemon_not_found">Pokemon not found</string>
+    <string name="text_no_favorites">No Favorites</string>
+    <string name="text_pokemon_not_found">Pokemon not found</string>
+
+    <string name="content_clear_text">Clear Text</string>
+    <string name="content_search">Search</string>
+    <string name="content_image">Image of %s</string>
+
+    <string name="toast_item_added_to_favorite">added to favorites</string>
+    <string name="toast_item_removed_from_favorite">removed from favorites</string>
+
     <string name="button_back">Button Back</string>
     <string name="button_favorite">Button Favorite</string>
 </resources>
