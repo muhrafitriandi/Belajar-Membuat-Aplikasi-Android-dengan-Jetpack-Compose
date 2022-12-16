@@ -32,7 +32,11 @@ fun BottomNavGraph(
             })
         }
         composable(route = Screen.Favorite.route) {
-            FavoriteScreen()
+            FavoriteScreen(
+                navigateToDetail = { id ->
+                    navHostController.navigate(Screen.DetailMonster.createRoute(id))
+                }
+            )
         }
         composable(route = Screen.Profile.route) {
             ProfileScreen()
