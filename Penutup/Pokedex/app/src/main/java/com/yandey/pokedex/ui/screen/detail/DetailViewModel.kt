@@ -7,28 +7,34 @@ import com.yandey.pokedex.data.repository.monster.MonsterRepository
 import com.yandey.pokedex.ui.common.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: MonsterRepository
+    private val repository: MonsterRepository,
 ) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<UiState<Monster>> = MutableStateFlow(UiState.Loading)
-    val uiState: StateFlow<UiState<Monster>> get() = _uiState
+    private val _monster = MutableStateFlow<UiState<Monster>>(UiState.Loading)
+    val monster = _monster.asStateFlow()
 
-    fun getMonsterById(id: Long) {
+    fun getFavoriteStateMonsterFromDB(id: Long) {
         viewModelScope.launch {
-            repository.getMonsterById(id)
+            repository.getFavoriteStateMonsterFromDB(id)
                 .catch {
-                    _uiState.value = UiState.Error(it.message.toString())
+                    _monster.value = UiState.Error(it.message.toString())
                 }
-                .collect { monsters ->
-                    _uiState.value = UiState.Success(monsters)
+                .collect { monster ->
+                    _monster.value = UiState.Success(monster)
                 }
+        }
+    }
+
+    fun updateFavoriteMonsterFromDB(id: Long, isFavorite: Boolean) {
+        viewModelScope.launch {
+            repository.updateFavoriteMonsterFromDB(id, isFavorite)
         }
     }
 }

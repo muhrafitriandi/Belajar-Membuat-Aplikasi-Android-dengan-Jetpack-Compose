@@ -1,15 +1,18 @@
 package com.yandey.pokedex.ui.screen.detail
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,20 +28,23 @@ fun DetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     navigateBack: () -> Unit,
 ) {
-    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
+    viewModel.monster.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
-                viewModel.getMonsterById(id)
+                LoadingState()
+                viewModel.getFavoriteStateMonsterFromDB(id)
+            }
+            is UiState.Error -> {
+                ErrorState(error = uiState.errorMessage)
             }
             is UiState.Success -> {
-                val data = uiState.data
                 Details(
                     modifier = modifier,
-                    monster = data,
-                    onBackClick = navigateBack
+                    monster = uiState.data,
+                    onBackClick = navigateBack,
+                    onUpdateFavoriteMonster = viewModel::updateFavoriteMonsterFromDB
                 )
             }
-            is UiState.Error -> {}
         }
     }
 }
@@ -83,16 +89,35 @@ fun Details(
     modifier: Modifier = Modifier,
     monster: Monster,
     onBackClick: () -> Unit,
+    onUpdateFavoriteMonster: (id: Long, isFavorite: Boolean) -> Unit,
 ) {
+
+    var enabled by remember {
+        mutableStateOf(monster.isFavorite)
+    }
+
+    val context = LocalContext.current.applicationContext
+    val message = "${monster.name} ${
+        if (!enabled) stringResource(id = R.string.toast_item_added_to_favorite)
+        else stringResource(id = R.string.toast_item_removed_from_favorite)
+    }"
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(stringResource(id = R.string.text_details)) },
                 actions = {
-                    TopAppBarActionButton(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        description = stringResource(id = R.string.button_favorite)
-                    ) {}
+                    IconButton(onClick = {
+                        onUpdateFavoriteMonster(monster.id, !monster.isFavorite)
+                        enabled = !monster.isFavorite
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                    }) {
+                        Icon(
+                            imageVector = if (enabled) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                            contentDescription = stringResource(id = R.string.button_favorite),
+                            tint = if (enabled) Color.Red else MaterialTheme.colors.surface
+                        )
+                    }
                 },
                 elevation = 0.dp,
                 backgroundColor = MaterialTheme.colors.background,
@@ -101,7 +126,7 @@ fun Details(
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = stringResource(id = R.string.button_back),
-                        modifier = Modifier
+                        modifier = modifier
                             .size(24.dp, 24.dp)
                             .clickable {
                                 onBackClick()
