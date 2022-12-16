@@ -4,35 +4,55 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.yandey.pokedex.data.FakeMonsterDataSource
 import com.yandey.pokedex.data.models.Monster
 import com.yandey.pokedex.data.repository.monster.MonsterRepository
 import com.yandey.pokedex.ui.common.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: MonsterRepository
+    private val monsterRepository: MonsterRepository,
 ) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<UiState<List<Monster>>> = MutableStateFlow(UiState.Loading)
-    val uiState: StateFlow<UiState<List<Monster>>> get() = _uiState
-    private val _query = mutableStateOf("")
-    val query: State<String> get() = _query
+    init {
+        getAllMonstersFromDB()
+    }
 
-    fun search(newQuery: String) {
+    private val _monsters = MutableStateFlow<UiState<List<Monster>>>(UiState.Loading)
+    val monsters = _monsters.asStateFlow()
+
+    private val _query = mutableStateOf("")
+    val query: State<String> = _query
+
+    private fun getAllMonstersFromDB() {
         viewModelScope.launch {
-            _query.value = newQuery
-            repository.searchMonsters(_query.value)
+            monsterRepository.getAllMonstersFromDB()
                 .catch {
-                    _uiState.value = UiState.Error(it.message.toString())
+                    _monsters.value = UiState.Error(it.message.toString())
                 }
                 .collect { monsters ->
-                    _uiState.value = UiState.Success(monsters)
+                    if (monsters.isNotEmpty()) {
+                        _monsters.value = UiState.Success(monsters)
+                    } else {
+                        monsterRepository.insertMonstersToDB(FakeMonsterDataSource.dummyMonster)
+                    }
+                }
+        }
+    }
+
+    fun searchMonstersFromDB(newQuery: String) {
+        viewModelScope.launch {
+            _query.value = newQuery
+            monsterRepository.searchMonstersFromDB(_query.value)
+                .catch {
+                    _monsters.value = UiState.Error(it.message.toString())
+                }
+                .collect { monsters ->
+                    _monsters.value = UiState.Success(monsters)
                 }
         }
     }

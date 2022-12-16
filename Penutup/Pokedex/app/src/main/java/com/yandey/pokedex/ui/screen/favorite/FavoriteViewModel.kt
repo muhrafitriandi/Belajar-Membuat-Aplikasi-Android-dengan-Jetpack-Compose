@@ -25,8 +25,12 @@ class FavoriteViewModel @Inject constructor(
     private fun getAllFavoriteMonstersFromDB() {
         viewModelScope.launch {
             monsterRepository.getAllFavoriteMonstersFromDB()
-                .catch { _monsters.value = UiState.Error(it.message.toString()) }
-                .collect { _monsters.value = UiState.Success(it) }
+                .catch {
+                    _monsters.value = UiState.Error(it.message.toString())
+                }
+                .collect { monsters ->
+                    _monsters.value = UiState.Success(monsters)
+                }
         }
     }
 }
