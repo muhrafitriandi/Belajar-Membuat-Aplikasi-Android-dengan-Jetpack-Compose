@@ -33,7 +33,7 @@ fun SearchBar(
             Icon(
                 imageVector = Icons.Default.Search,
                 tint = Color.LightGray,
-                contentDescription = null
+                contentDescription = stringResource(id = R.string.content_search)
             )
         },
         trailingIcon = {
@@ -44,7 +44,7 @@ fun SearchBar(
                     Icon(
                         imageVector = Icons.Default.Clear,
                         tint = Color.LightGray,
-                        contentDescription = null,
+                        contentDescription = stringResource(id = R.string.content_clear_text),
                         modifier = modifier
                             .clickable {
                                 onQueryChange("")

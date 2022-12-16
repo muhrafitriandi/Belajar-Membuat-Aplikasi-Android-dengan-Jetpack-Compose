@@ -19,7 +19,7 @@ import com.yandey.pokedex.ui.theme.PokedexTheme
 @Composable
 fun MonsterBasicInfo(
     modifier: Modifier = Modifier,
-    monster: Monster
+    monster: Monster,
 ) {
     Row(
         modifier = modifier
@@ -30,18 +30,19 @@ fun MonsterBasicInfo(
         Column {
 
             Box {
-                MonsterImage(
+                LoadImage(
                     modifier = modifier
                         .fillMaxWidth()
                         .size(250.dp),
-                    monster = monster
+                    imageUrl = monster.imageUrl,
+                    contentDescription = stringResource(id = R.string.content_image, monster.name)
                 )
             }
 
             Row {
-                MonsterName(
+                Text(
                     modifier = modifier.padding(0.dp, 0.dp, 0.dp, 8.dp),
-                    monster = monster,
+                    text = monster.name,
                     style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.surface
@@ -52,9 +53,9 @@ fun MonsterBasicInfo(
                 GenderLabel(gender = monster.gender)
             }
 
-            MonsterCategory(
+            Text(
                 modifier = modifier.padding(0.dp, 0.dp, 0.dp, 8.dp),
-                monster = monster,
+                text = monster.category,
                 color = MaterialTheme.colors.surface,
                 style = MaterialTheme.typography.caption
             )
@@ -72,24 +73,26 @@ fun MonsterBasicInfo(
 @Composable
 fun MonsterBiologyInfo(
     modifier: Modifier = Modifier,
-    monster: Monster
+    monster: Monster,
 ) {
     Spacer(modifier = modifier.height(16.dp))
-    Title(
+    Text(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp, 0.dp, 16.dp, 0.dp),
-        title = stringResource(id = R.string.text_biology),
+        text = stringResource(id = R.string.text_biology),
         style = MaterialTheme.typography.subtitle1,
         fontWeight = FontWeight.W600,
         textAlign = TextAlign.Start
     )
+
     Spacer(modifier = modifier.height(8.dp))
-    Value(
+
+    Text(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp, 0.dp, 16.dp, 16.dp),
-        value = monster.biology,
+        text = monster.biology,
         style = MaterialTheme.typography.body2,
         textAlign = TextAlign.Justify
     )
@@ -98,19 +101,21 @@ fun MonsterBiologyInfo(
 @Composable
 fun MonsterAbout(
     modifier: Modifier = Modifier,
-    monster: Monster
+    monster: Monster,
 ) {
     Spacer(modifier = modifier.height(16.dp))
-    Title(
+    Text(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp, 0.dp, 16.dp, 0.dp),
-        title = stringResource(id = R.string.text_about),
+        text = stringResource(id = R.string.text_about),
         style = MaterialTheme.typography.subtitle1,
         fontWeight = FontWeight.W600,
         textAlign = TextAlign.Start
     )
+
     Spacer(modifier = modifier.height(8.dp))
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -135,29 +140,27 @@ fun MonsterAbout(
 @Composable
 fun OwnerInfo(
     modifier: Modifier = Modifier,
-    monster: Monster
+    monster: Monster,
 ) {
     Spacer(modifier = modifier.height(16.dp))
-    Title(
+    Text(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp, 0.dp, 16.dp, 0.dp),
-        title = stringResource(id = R.string.text_owner),
+        text = stringResource(id = R.string.text_owner),
         style = MaterialTheme.typography.subtitle1,
         fontWeight = FontWeight.W600,
         textAlign = TextAlign.Start
     )
     Spacer(modifier = modifier.height(8.dp))
-    OwnerCard(
-        monster = monster
-    )
+    OwnerCard(monster = monster)
 }
 
 @Composable
 fun FindMeButton(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    Spacer(modifier = Modifier.height(16.dp))
+    Spacer(modifier = modifier.height(16.dp))
     Button(
         onClick = {},
         modifier = modifier
@@ -174,7 +177,7 @@ fun FindMeButton(
             color = MaterialTheme.colors.onSurface
         )
     }
-    Spacer(modifier = Modifier.height(24.dp))
+    Spacer(modifier = modifier.height(24.dp))
 }
 
 @Composable

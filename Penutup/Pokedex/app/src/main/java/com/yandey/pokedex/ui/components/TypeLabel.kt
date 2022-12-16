@@ -14,7 +14,8 @@ import com.yandey.pokedex.ui.theme.PokedexTheme
 @Composable
 fun TypeLabel(
     modifier: Modifier = Modifier,
-    types: List<String>) {
+    types: List<String>,
+) {
     for (type in types) {
         when (type) {
             "Electric" -> R.color.yellow

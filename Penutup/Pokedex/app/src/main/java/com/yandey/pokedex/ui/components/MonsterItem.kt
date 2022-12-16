@@ -6,14 +6,17 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.MaterialTheme.typography
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.yandey.pokedex.R
 import com.yandey.pokedex.data.FakeMonsterDataSource
 import com.yandey.pokedex.data.models.Monster
 import com.yandey.pokedex.ui.theme.PokedexTheme
@@ -22,7 +25,7 @@ import com.yandey.pokedex.ui.theme.PokedexTheme
 fun MonsterItem(
     modifier: Modifier = Modifier,
     monster: Monster,
-    onItemClick: (id: Long) -> Unit
+    onItemClick: (id: Long) -> Unit,
 ) {
     Card(
         modifier = modifier
@@ -41,12 +44,13 @@ fun MonsterItem(
                 .padding(16.dp)
         ) {
 
-            MonsterImage(
-                monster = monster,
+            LoadImage(
                 modifier = modifier
                     .align(Alignment.CenterVertically)
                     .size(80.dp, 80.dp)
                     .clip(RoundedCornerShape(16.dp)),
+                imageUrl = monster.imageUrl,
+                contentDescription = stringResource(id = R.string.content_image, monster.name),
                 contentScale = ContentScale.Crop
             )
 
@@ -54,8 +58,8 @@ fun MonsterItem(
 
             Column {
 
-                MonsterName(
-                    monster = monster,
+                Text(
+                    text = monster.name,
                     style = typography.subtitle1,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colors.surface
@@ -63,8 +67,8 @@ fun MonsterItem(
 
                 Spacer(modifier = modifier.height(8.dp))
 
-                MonsterCategory(
-                    monster = monster,
+                Text(
+                    text = monster.category,
                     color = MaterialTheme.colors.surface,
                     style = typography.caption
                 )

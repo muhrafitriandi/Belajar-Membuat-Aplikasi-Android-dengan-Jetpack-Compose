@@ -1,22 +1,20 @@
 package com.yandey.pokedex.ui.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.LocalTextStyle
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.yandey.pokedex.data.models.Monster
-import com.yandey.pokedex.ui.theme.PokedexTheme
+import com.yandey.pokedex.R
 
 @Composable
 fun EmptyData(
@@ -35,95 +33,41 @@ fun EmptyData(
 }
 
 @Composable
-fun Title(
+fun LoadImage(
     modifier: Modifier = Modifier,
-    color: Color = Color.Unspecified,
-    title: String,
-    style: TextStyle = LocalTextStyle.current,
-    fontWeight: FontWeight? = null,
-    textAlign: TextAlign? = null
-) {
-    Text(
-        text = title,
-        modifier = modifier,
-        color = color,
-        style = style,
-        fontWeight = fontWeight,
-        textAlign = textAlign
-    )
-}
-
-@Composable
-fun Value(
-    modifier: Modifier = Modifier,
-    color: Color = Color.Unspecified,
-    fontWeight: FontWeight? = null,
-    value: String,
-    style: TextStyle = LocalTextStyle.current,
-    textAlign: TextAlign? = null
-) {
-    Text(
-        text = value,
-        modifier = modifier,
-        color = color,
-        fontWeight = fontWeight,
-        style = style,
-        textAlign = textAlign
-    )
-}
-
-@Composable
-fun MonsterImage(
-    modifier: Modifier = Modifier,
-    monster: Monster,
-    contentScale: ContentScale = ContentScale.Fit
+    imageUrl: String,
+    contentDescription: String,
+    contentScale: ContentScale = ContentScale.Fit,
+    alignment: Alignment = Alignment.Center
 ) {
     AsyncImage(
         modifier = modifier,
-        model = monster.imageUrl,
-        contentDescription = null,
-        contentScale = contentScale
+        model = imageUrl,
+        contentDescription = contentDescription,
+        contentScale = contentScale,
+        alignment = alignment,
+        placeholder = painterResource(R.drawable.ic_baseline_loading_image),
+        error = painterResource(R.drawable.ic_baseline_broken_image)
     )
 }
 
 @Composable
-fun MonsterName(
+fun ChipView(
     modifier: Modifier = Modifier,
-    monster: Monster,
-    style: TextStyle = LocalTextStyle.current,
-    fontWeight: FontWeight? = null,
-    color: Color = Color.Unspecified
+    item: Any,
+    colorResource: Color
 ) {
-    Text(
-        modifier = modifier,
-        text = monster.name,
-        style = style,
-        fontWeight = fontWeight,
-        color = color
-    )
-}
-
-@Composable
-fun MonsterCategory(
-    modifier: Modifier = Modifier,
-    monster: Monster,
-    color: Color = Color.Unspecified,
-    style: TextStyle = LocalTextStyle.current
-) {
-    Text(
-        modifier = modifier,
-        text = monster.category,
-        color = color,
-        style = style
-    )
-}
-
-@Composable
-@Preview
-fun EmptyDataPreview() {
-    PokedexTheme {
-        EmptyData(
-            text = "Pokemon not found"
+    Box(
+        modifier = modifier
+            .wrapContentWidth()
+            .clip(RoundedCornerShape(12.dp))
+            .background(colorResource.copy(.08f))
+    ) {
+        Text(
+            text = item as String,
+            modifier = modifier.padding(12.dp, 6.dp, 12.dp, 6.dp),
+            style = MaterialTheme.typography.caption,
+            color = colorResource
         )
     }
 }
