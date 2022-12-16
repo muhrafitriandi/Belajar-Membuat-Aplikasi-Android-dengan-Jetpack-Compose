@@ -1,30 +1,40 @@
 package com.yandey.pokedex.data.repository.monster
 
-import com.yandey.pokedex.data.FakeMonsterDataSource
+import com.yandey.pokedex.data.local.room.MonsterDao
 import com.yandey.pokedex.data.models.Monster
+import com.yandey.pokedex.utils.Mapper.mapEntityToDomain
+import com.yandey.pokedex.utils.Mapper.mapListDomainToEntity
+import com.yandey.pokedex.utils.Mapper.mapListEntityToDomain
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class MonsterRepositoryImpl @Inject constructor(
+    private val monsterDao: MonsterDao,
 ) : MonsterRepository {
 
-    override fun searchMonsters(query: String): Flow<List<Monster>> = flow {
-        val data = monster.filter { monster ->
-            monster.name.contains(query, ignoreCase = true)
+    override suspend fun insertMonstersToDB(listMonter: List<Monster>) =
+        monsterDao.insertMonsters(mapListDomainToEntity(listMonter))
+
+    override fun getAllMonstersFromDB() =
+        monsterDao.getAllMonsters().map { monstersEntity ->
+            mapListEntityToDomain(monstersEntity)
         }
-        emit(data)
-    }
 
-    override fun getMonsterById(id: Long): Flow<Monster> =
-        flowOf(monster.first {
-            it.id == id
-        })
-
-    private val monster = mutableListOf<Monster>()
-
-    init {
-        if (monster.isEmpty()) {
-            monster.addAll(FakeMonsterDataSource.dummyMonster)
+    override fun getAllFavoriteMonstersFromDB() =
+        monsterDao.getAllFavoriteMonsters().map { monstersEntity ->
+            mapListEntityToDomain(monstersEntity)
         }
-    }
+
+    override fun getFavoriteStateMonsterFromDB(id: Long) =
+        monsterDao.getFavoriteStateMonster(id).map { monsterEntity ->
+            mapEntityToDomain(monsterEntity)
+        }
+
+    override fun searchMonstersFromDB(name: String) =
+        monsterDao.searchMonsters(name).map { monstersEntity ->
+            mapListEntityToDomain(monstersEntity)
+        }
+
+    override suspend fun updateFavoriteMonsterFromDB(id: Long, isFavorite: Boolean) =
+        monsterDao.updateFavoriteMonster(id, isFavorite)
 }

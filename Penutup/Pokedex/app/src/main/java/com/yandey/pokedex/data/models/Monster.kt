@@ -2,21 +2,6 @@ package com.yandey.pokedex.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Owner(
-
-    @field:SerializedName("id")
-    val id: Long,
-
-    @field:SerializedName("name")
-    val name: String,
-
-    @field:SerializedName("trainer_class")
-    val trainerClass: String,
-
-    @field:SerializedName("image_url")
-    val imageUrl: String
-)
-
 data class Monster(
 
     @field:SerializedName("id")
@@ -50,5 +35,22 @@ data class Monster(
     val imageUrl: String,
 
     @field:SerializedName("owner")
-    val owner: Owner
+    val owner: Owner,
+
+    var isFavorite: Boolean = false,
+)
+
+data class Owner(
+
+    @field:SerializedName("id")
+    val id: Long,
+
+    @field:SerializedName("name")
+    val name: String,
+
+    @field:SerializedName("trainer_class")
+    val trainerClass: String,
+
+    @field:SerializedName("image_url")
+    val imageUrl: String,
 )
