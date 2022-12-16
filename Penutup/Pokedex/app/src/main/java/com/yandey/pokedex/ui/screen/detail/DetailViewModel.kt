@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: MonsterRepository,
+    private val monsterRepository: MonsterRepository,
 ) : ViewModel() {
 
     private val _monster = MutableStateFlow<UiState<Monster>>(UiState.Loading)
@@ -22,7 +22,7 @@ class DetailViewModel @Inject constructor(
 
     fun getFavoriteStateMonsterFromDB(id: Long) {
         viewModelScope.launch {
-            repository.getFavoriteStateMonsterFromDB(id)
+            monsterRepository.getFavoriteStateMonsterFromDB(id)
                 .catch {
                     _monster.value = UiState.Error(it.message.toString())
                 }
@@ -34,7 +34,7 @@ class DetailViewModel @Inject constructor(
 
     fun updateFavoriteMonsterFromDB(id: Long, isFavorite: Boolean) {
         viewModelScope.launch {
-            repository.updateFavoriteMonsterFromDB(id, isFavorite)
+            monsterRepository.updateFavoriteMonsterFromDB(id, isFavorite)
         }
     }
 }

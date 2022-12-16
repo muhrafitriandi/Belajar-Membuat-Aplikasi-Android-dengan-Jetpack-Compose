@@ -2,6 +2,8 @@ package com.yandey.pokedex.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -16,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.yandey.pokedex.R
+import com.yandey.pokedex.data.models.Monster
 
 @Composable
 fun EmptyData(
@@ -29,6 +32,24 @@ fun EmptyData(
         Text(
             text = text
         )
+    }
+}
+
+@Composable
+fun ShowMonsters(
+    modifier: Modifier = Modifier,
+    monsters: List<Monster>,
+    onItemClick: (id: Long) -> Unit
+) {
+    LazyColumn(
+        contentPadding = PaddingValues(8.dp, 0.dp, 8.dp, 8.dp),
+        modifier = modifier
+    ) {
+        items(monsters) { monster ->
+            MonsterItem(monster = monster) { id ->
+                onItemClick(id)
+            }
+        }
     }
 }
 
