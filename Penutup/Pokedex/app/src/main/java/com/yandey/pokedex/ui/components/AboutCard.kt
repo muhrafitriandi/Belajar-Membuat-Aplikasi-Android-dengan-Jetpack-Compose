@@ -48,7 +48,7 @@ fun AboutCard(
             Text(
                 modifier = modifier.fillMaxWidth(),
                 text = title,
-                style = MaterialTheme.typography.overline,
+                style = MaterialTheme.typography.caption,
                 textAlign = TextAlign.Center
             )
 

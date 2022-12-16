@@ -15,12 +15,12 @@ class FavoriteViewModel @Inject constructor(
     private val monsterRepository: MonsterRepository,
 ) : ViewModel() {
 
+    private val _monsters = MutableStateFlow<UiState<List<Monster>>>(UiState.Loading)
+    val monsters = _monsters.asStateFlow()
+
     init {
         getAllFavoriteMonstersFromDB()
     }
-
-    private val _monsters = MutableStateFlow<UiState<List<Monster>>>(UiState.Loading)
-    val monsters = _monsters.asStateFlow()
 
     private fun getAllFavoriteMonstersFromDB() {
         viewModelScope.launch {

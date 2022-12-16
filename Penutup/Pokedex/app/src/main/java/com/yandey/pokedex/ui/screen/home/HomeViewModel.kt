@@ -18,15 +18,15 @@ class HomeViewModel @Inject constructor(
     private val monsterRepository: MonsterRepository,
 ) : ViewModel() {
 
-    init {
-        getAllMonstersFromDB()
-    }
-
     private val _monsters = MutableStateFlow<UiState<List<Monster>>>(UiState.Loading)
     val monsters = _monsters.asStateFlow()
 
     private val _query = mutableStateOf("")
     val query: State<String> = _query
+
+    init {
+        getAllMonstersFromDB()
+    }
 
     private fun getAllMonstersFromDB() {
         viewModelScope.launch {
