@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@Suppress("unused")
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     private val monsterRepository: MonsterRepository,

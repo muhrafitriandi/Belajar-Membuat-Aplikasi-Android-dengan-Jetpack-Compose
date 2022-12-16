@@ -2,7 +2,6 @@ package com.yandey.pokedex.data.models
 
 import com.google.gson.annotations.SerializedName
 
-@Suppress("unused")
 data class Monster(
 
     @field:SerializedName("id")
@@ -41,7 +40,6 @@ data class Monster(
     var isFavorite: Boolean = false,
 )
 
-@Suppress("unused")
 data class Owner(
 
     @field:SerializedName("id")

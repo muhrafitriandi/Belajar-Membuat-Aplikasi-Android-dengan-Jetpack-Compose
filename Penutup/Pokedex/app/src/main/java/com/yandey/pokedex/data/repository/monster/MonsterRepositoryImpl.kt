@@ -8,7 +8,6 @@ import com.yandey.pokedex.utils.Mapper.mapListEntityToDomain
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-@Suppress("unused")
 class MonsterRepositoryImpl @Inject constructor(
     private val monsterDao: MonsterDao,
 ) : MonsterRepository {

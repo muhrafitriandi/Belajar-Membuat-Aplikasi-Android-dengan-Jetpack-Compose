@@ -3,7 +3,6 @@ package com.yandey.pokedex.utils
 import com.yandey.pokedex.data.local.entity.MonsterEntity
 import com.yandey.pokedex.data.models.Monster
 
-@Suppress("unused")
 object Mapper {
 
     fun mapListEntityToDomain(listMonsterEntity: List<MonsterEntity>) =
