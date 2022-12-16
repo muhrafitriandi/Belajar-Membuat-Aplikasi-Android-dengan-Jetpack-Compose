@@ -8,12 +8,13 @@ import com.yandey.pokedex.utils.Mapper.mapListEntityToDomain
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
+@Suppress("unused")
 class MonsterRepositoryImpl @Inject constructor(
     private val monsterDao: MonsterDao,
 ) : MonsterRepository {
 
-    override suspend fun insertMonstersToDB(listMonter: List<Monster>) =
-        monsterDao.insertMonsters(mapListDomainToEntity(listMonter))
+    override suspend fun insertMonstersToDB(listMonster: List<Monster>) =
+        monsterDao.insertMonsters(mapListDomainToEntity(listMonster))
 
     override fun getAllMonstersFromDB() =
         monsterDao.getAllMonsters().map { monstersEntity ->

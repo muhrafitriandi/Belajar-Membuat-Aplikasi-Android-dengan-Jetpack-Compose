@@ -6,6 +6,10 @@ plugins {
 }
 
 android {
+    lintOptions {
+        disable 'TypographyFractions','TypographyQuotes'
+        abortOnError false
+    }
     namespace 'com.yandey.pokedex'
     compileSdk 33
 

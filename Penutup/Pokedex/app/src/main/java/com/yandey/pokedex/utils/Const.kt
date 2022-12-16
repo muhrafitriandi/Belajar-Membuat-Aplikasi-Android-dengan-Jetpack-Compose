@@ -1,5 +1,6 @@
 package com.yandey.pokedex.utils
 
+@Suppress("unused")
 object Route {
     const val HOME_ROUTE = "home"
     const val FAVORITE_ROUTE = "favorite"
@@ -7,10 +8,12 @@ object Route {
     const val DETAIL_ROUTE = "home/{id}"
 }
 
+@Suppress("unused")
 object Constant {
     const val ID = "id"
 }
 
+@Suppress("unused")
 object ConstDB {
     const val MONSTER_TABLE = "monster"
     const val POKEDEX_DB = "pokedex.db"

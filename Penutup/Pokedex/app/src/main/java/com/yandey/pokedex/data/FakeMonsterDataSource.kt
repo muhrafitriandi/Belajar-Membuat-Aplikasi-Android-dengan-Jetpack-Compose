@@ -3,6 +3,7 @@ package com.yandey.pokedex.data
 import com.yandey.pokedex.data.models.Monster
 import com.yandey.pokedex.data.models.Owner
 
+@Suppress("unused")
 object FakeMonsterDataSource {
 
     val dummyMonster = listOf(

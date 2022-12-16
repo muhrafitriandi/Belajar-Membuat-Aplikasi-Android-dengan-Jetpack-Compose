@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("unused")
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val monsterRepository: MonsterRepository,

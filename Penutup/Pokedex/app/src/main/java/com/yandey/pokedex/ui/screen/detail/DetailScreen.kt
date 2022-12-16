@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.yandey.pokedex.ui.screen.detail
 
 import android.widget.Toast

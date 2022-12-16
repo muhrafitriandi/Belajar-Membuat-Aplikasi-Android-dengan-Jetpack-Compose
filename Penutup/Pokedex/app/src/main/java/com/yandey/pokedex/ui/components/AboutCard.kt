@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.yandey.pokedex.ui.components
 
 import androidx.compose.foundation.background
