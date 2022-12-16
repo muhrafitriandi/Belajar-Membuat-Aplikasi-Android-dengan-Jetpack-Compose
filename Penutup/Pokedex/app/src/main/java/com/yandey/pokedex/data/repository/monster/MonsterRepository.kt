@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface MonsterRepository {
 
-    suspend fun insertMonstersToDB(listMonter: List<Monster>)
+    suspend fun insertMonstersToDB(listMonster: List<Monster>)
 
     fun getAllMonstersFromDB(): Flow<List<Monster>>
 
